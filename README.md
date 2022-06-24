@@ -37,14 +37,14 @@ to set your screener on browser & copy the link to "url")
 ### Download symbol list from the "url":
 symbols = yf.download_symbols(url)  
 
-### you could set the speed (num of request/sec) & retry (num of additional download):
+### You could set the speed (num of request/sec) & retry (num of additional download):
 symbols = yf.download_symbols(url, speed=0.1, retry=1)  
 
 
 ## 2) Download instantaneous stocks' data into pd.DataFrame (super fast):
 info_df = yf.download_info(symbols)
 
-### get instantaneous prices for all stocks in a pd.Series:
+### Get instantaneous prices for all stocks in a pd.Series:
 info_df.regularMarketPrice
 
 
@@ -53,30 +53,30 @@ symbols = ['TSLA', 'TSM', 'MARA', 'MRNA']
 
 info_df = yf.download_details(symbols, speed=1.0)
 
-### get info by labels:
+### Get info by labels:
 info_df[['sector', 'industry', 'exDividendDate', 'sharesPercentSharesOut']]
 
 
 ## 4) Download daily historical data:
-### single stock, return pd.DataFrame:
+### Single stock, return pd.DataFrame:
 tsm = yf.download_day('TSM')
 
-### given list of stocks, return dict of pd.DataFrame(s):
+### List of stocks, return dict of pd.DataFrame(s):
 ohlcvs = yf.download_day(symbols)
 
-### 1.0 sec per download request (to avoid hitting rate limit):
+### Set 1.0 sec per download request (to avoid hitting rate limit):
 ohlcvs = yf.download_day(symbols, speed=1.0)
 
-### set num of download retry for any failed download:
+### Set num of download retry for any failed download:
 ohlcvs = yf.download_day(symbols, retry=2)
 
-### show detailed download info:
+### Show detailed download info:
 ohlcvs = yf.download_day(symbols, verbose=True)
 
-### set a range of dates only (end day not included):
+### Set a range of dates only (end day not included):
 ohlcvs = yf.download_day(symbols, start='2020-08-01', end='2020-09-04')
 
-### includes devidends & split ratios:
+### Includes devidends & split ratios:
 ohlcvs = yf.download_day(symbols, show_actions=True)
 
 ### Combine dict of ohlcvs into a single pd.DataFrame (beware of many null values):
@@ -90,5 +90,5 @@ tsm = yf.download_minute('TSM')
 
 ohlcvs = yf.download_minute(symbols)
 
-### to include pre-market & post-market data:
+### Include pre-market & post-market data:
 ohlcvs = yf.download_minute(symbols, show_prepost=True)
