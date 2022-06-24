@@ -13,7 +13,7 @@ Improvements over the exisiting Python package "yfinance":
 3) allow you to set timeouts on download requests
 4) able to download a list of tickers from Stock Screener (https://finance.yahoo.com/screener/equity/new)
 5) able to download real-time market data given the tickers (superfast)
-6) able to download 1 month of minute historical data in single run (only 7days fo "yfinance")
+6) able to download 1 month of minute historical data in single run (only 7 days for "yfinance")
 
 
 
