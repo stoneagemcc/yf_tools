@@ -7,7 +7,7 @@ Multi-threaded yahoo finance data downloader on:
 3) real-time market data (superfast, <1 sec for thousands of stocks)
 4) detailed stock data (e.g. fundamental data)
 
-Improvements over the exisiting Python package "yfinance" on:
+Improvements over the exisiting Python package "yfinance":
 1) allow you to set speed control to avoid hitting the server rate limit
 2) allow you to set the number of retry to retry download if there is any download failed
 3) allow you to set timeouts on download requests
@@ -26,8 +26,8 @@ import yf_tools as yf
 url = yf.get_symbols_download_url('US', retry=1, timeout=5)
   
 (you could increase retry & set longer timeout for unstable network
-or you could browse "https://finance.yahoo.com/screener/equity/new" .
-to set your screener & copy the link to url)
+or you could browse "https://finance.yahoo.com/screener/equity/new" 
+to set your screener & copy the link to "url")
   
 ### Download symbol list from the "url":
 symbols = yf.download_symbols(url)  
