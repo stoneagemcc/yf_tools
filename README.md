@@ -17,68 +17,70 @@ Improvements over the exisiting Python package "yfinance" on:
 
 
 
-Examples of use:
+# Examples of use:
 import yf_tools as yf
 
 
-### Download stock symbol (ticker) list
-E.g. Download a list of 'US' stocks (Nasdaq & NYSE)
+## 1) Download stock symbol (ticker) list:
+### E.g. Download a list of 'US' stocks (Nasdaq & NYSE):
 url = yf.get_symbols_download_url('US', retry=1, timeout=5)
+  
+(you could increase retry & set longer timeout for unstable network
+or you could browse "https://finance.yahoo.com/screener/equity/new" .
+to set your screener & copy the link to url)
+  
+### Download symbol list from the "url":
+symbols = yf.download_symbols(url)  
 
-you could increase retry & set longer timeout for unstable network
-or you could browse "https://finance.yahoo.com/screener/equity/new" to set your screener & copy the link to url
-
-# Download symbol list from the "url"
-symbols = yf.download_symbols(url)
-# you could set speed (num of request/sec) & retry, e.g.
-symbols = yf.download_symbols(url, speed=0.1, retry=1)
+### you could set the speed (num of request/sec) & retry:
+symbols = yf.download_symbols(url, speed=0.1, retry=1)  
 
 
-### Download stocks' instantaneous data into pd.DataFrame (super fast)
+## 2) Download instantaneous stocks' data into pd.DataFrame (super fast):
 info_df = yf.download_info(symbols)
 
-# get instantaneous prices for all stocks in a pd.Series
+### get instantaneous prices for all stocks in a pd.Series:
 info_df.regularMarketPrice
 
 
-### Download comprehensive stocks' information into pd.DataFrame (beware of yf rate limit)
+## 3) Download comprehensive stocks' information into pd.DataFrame (beware of yf rate limit):
 symbols = ['TSLA', 'TSM', 'MARA', 'MRNA']
 info_df = yf.download_details(symbols, speed=1.0)
 
-# get info by labels
+### get info by labels:
 info_df[['sector', 'industry', 'exDividendDate', 'sharesPercentSharesOut']]
 
 
-### Download daily historical data
+## 4) Download daily historical data:
+### single stock, return pd.DataFrame:
+tsm = yf.download_day('TSM')
 
-# single stock, return pd.DataFrame
-tsm = download_day('TSM')
+### given list of stocks, return dict of pd.DataFrame(s):
+ohlcvs = yf.download_day(symbols)
 
-# given list of stocks, return dict of pd.DataFrame(s)
-ohlcvs = download_day(symbols)
+### 1.0 sec per download request (to avoid hitting rate limit):
+ohlcvs = yf.download_day(symbols, speed=1.0)
 
-# 1.0 sec per download request (to avoid hitting rate limit)
-ohlcvs = download_day(symbols, speed=1.0)
+### set num of download retry for any failed download:
+ohlcvs = yf.download_day(symbols, retry=2)
 
-# set num of download retry for any failed download
-ohlcvs = download_day(symbols, retry=2)
+### show detailed download info:
+ohlcvs = yf.download_day(symbols, verbose=True)
 
-# show detailed download info
-ohlcvs = download_day(symbols, verbose=True)
+### set a range of dates only (end day not included):
+ohlcvs = yf.download_day(symbols, start='2020-08-01', end='2020-09-04')
 
-# set a range of dates only (end day not included)
-ohlcvs = download_day(symbols, start='2020-08-01', end='2020-09-04')
+### includes devidends & split ratios:
+ohlcvs = yf.download_day(symbols, show_actions=True)
 
-# includes devidends & split ratios
-ohlcvs = download_day(symbols, show_actions=True)
-
-# Combine dict of ohlcvs into a single pd.DataFrame (beware of many null values)
+### Combine dict of ohlcvs into a single pd.DataFrame (beware of many null values):
+import pandas as pd
 ohlcvs_all = pd.concat(ohlcvs, axis=1)
 
 
-### Download historical data in minute frequency
-tsm = download_minute('TSM')
-ohlcvs = download_minute(symbols)
+## 5) Download historical data in minute frequency:
+tsm = yf.download_minute('TSM')
+ohlcvs = yf.download_minute(symbols)
 
-# to include pre-market & post-market data
-ohlcvs = download_minute(symbols, show_prepost=True)
+### to include pre-market & post-market data:
+ohlcvs = yf.download_minute(symbols, show_prepost=True)
