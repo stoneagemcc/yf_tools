@@ -1,6 +1,9 @@
 # yf_tools
 API of yahoo finance data
 
+Required Packages:
+numpy, pandas, requests, selenium, webdriver_manager
+
 Multi-threaded yahoo finance data downloader on:
 1) symbols (or tickers)
 2) historical data (daily + minute frequency)
@@ -25,11 +28,11 @@ import yf_tools as yf
 ### E.g. Download a list of 'US' stocks (Nasdaq & NYSE):
 url = yf.get_symbols_download_url('US', retry=1, timeout=5)
 
-(It uses (i) selenium & (ii) webdriver_manager, please "pip install")
+(you could increase retry & set longer timeout for unstable network)
 
-(you could increase retry & set longer timeout for unstable network
-or you could browse "https://finance.yahoo.com/screener/equity/new" 
-to set your screener & copy the link to "url")
+(It uses (i) selenium & (ii) webdriver_manager, please "pip install"
+or you could skip this step by browsing "https://finance.yahoo.com/screener/equity/new" 
+to set your screener on browser & copy the link to "url")
   
 ### Download symbol list from the "url":
 symbols = yf.download_symbols(url)  
