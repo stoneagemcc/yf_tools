@@ -45,6 +45,7 @@ info_df.regularMarketPrice
 
 ## 3) Download comprehensive stocks' information into pd.DataFrame (beware of yf rate limit):
 symbols = ['TSLA', 'TSM', 'MARA', 'MRNA']
+
 info_df = yf.download_details(symbols, speed=1.0)
 
 ### get info by labels:
@@ -75,11 +76,13 @@ ohlcvs = yf.download_day(symbols, show_actions=True)
 
 ### Combine dict of ohlcvs into a single pd.DataFrame (beware of many null values):
 import pandas as pd
+
 ohlcvs_all = pd.concat(ohlcvs, axis=1)
 
 
 ## 5) Download historical data in minute frequency:
 tsm = yf.download_minute('TSM')
+
 ohlcvs = yf.download_minute(symbols)
 
 ### to include pre-market & post-market data:
