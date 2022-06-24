@@ -32,7 +32,7 @@ to set your screener & copy the link to "url")
 ### Download symbol list from the "url":
 symbols = yf.download_symbols(url)  
 
-### you could set the speed (num of request/sec) & retry:
+### you could set the speed (num of request/sec) & retry (num of additional download):
 symbols = yf.download_symbols(url, speed=0.1, retry=1)  
 
 
