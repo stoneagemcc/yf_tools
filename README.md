@@ -25,7 +25,7 @@ import yf_tools as yf
 ### E.g. Download a list of 'US' stocks (Nasdaq & NYSE):
 url = yf.get_symbols_download_url('US', retry=1, timeout=5)
 
-(It uses packages (i) selenium & (ii) webdriver_manager, please "pip install")
+(It uses (i) selenium & (ii) webdriver_manager, please "pip install")
 
 (you could increase retry & set longer timeout for unstable network
 or you could browse "https://finance.yahoo.com/screener/equity/new" 
